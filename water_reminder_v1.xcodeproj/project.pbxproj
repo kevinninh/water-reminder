@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7DD6183E30858C3300283B33 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7DD6183D30858C3300283B33 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		7DD6181B308442DF00283B33 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		7DD6180D308442DE00283B33 /* water_reminder_v1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = water_reminder_v1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD6181A308442DF00283B33 /* water_reminder_v1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = water_reminder_v1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DD61824308442DF00283B33 /* water_reminder_v1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = water_reminder_v1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DD6183D30858C3300283B33 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		7DD61804308442DE00283B33 = {
 			isa = PBXGroup;
 			children = (
+				7DD6183D30858C3300283B33 /* .gitignore */,
 				7DD6180F308442DE00283B33 /* water_reminder_v1 */,
 				7DD6181D308442DF00283B33 /* water_reminder_v1Tests */,
 				7DD61827308442DF00283B33 /* water_reminder_v1UITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DD6183E30858C3300283B33 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
