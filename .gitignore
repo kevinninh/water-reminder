@@ -1,0 +1,16 @@
+//
+//  .gitignore
+//  water_reminder_v1
+//
+//  Created by Kevin Ninh on 10/18/26.
+//
+
+// Xcode user-specific files
+**/xcuserdata/
+
+// macOS files
+.DS_Store
+
+// Xcode build files
+DerivedData/
+build/
