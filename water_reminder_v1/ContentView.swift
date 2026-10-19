@@ -12,8 +12,18 @@ func sakuraMiko() {
     print("Sakura Miko!!")
 }
 
-class NotificationManger {
-    
+class NotificationManager {
+    static let shared = NotificationManager() //singleton design pattern
+    func requestAuthorization(){
+        UNUserNotificationCenter.current()
+            .requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+                if let error = error{
+                    print("Permission error: \(error)")
+                    return
+                }
+                print("Permission granted: \(granted)")
+            }
+    }
 }
 
 struct ContentView: View {
@@ -47,17 +57,10 @@ struct ContentView: View {
             }
             Text("\(selectedInterval)")
                 .font(.largeTitle) //why are functions able to be called w/o a ()?
-            UNUserNotificationCenter.current()
-                .requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
-                    if let error = error{
-                        print("Permission error: \(error)")
-                        return
-                    }
-                    print("Permission granted: \(granted)")
-                }
-            Button("Test Notification"){
-                
+            Button("Request Notification Auth"){
+                NotificationManager().requestAuthorization()
             }
+            
         }
     }
 }
