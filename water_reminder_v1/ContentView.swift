@@ -12,8 +12,23 @@ func sakuraMiko() {
     print("Sakura Miko!!")
 }
 
+
 class NotificationManager {
     static let shared = NotificationManager() //singleton design pattern
+    
+    func scheduleNotificaation(title: String, body: String){
+        let content = UNMutableNotificationContent()
+        content.title = "Drink water"
+        content.body = "here to be here lol"
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: nextTriggerData(selectedInterval), repeats: remindersEnabled)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        
+    }
+    
+    
     func requestAuthorization(){
         UNUserNotificationCenter.current()
             .requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
@@ -46,7 +61,7 @@ struct ContentView: View {
             }   label: {
                 Text("enable reminders")
             }
-            .padding()//why are buttons able to drop the parameters and let actions and labels go belowo them? is swift indent based like python as well?
+            .padding()
             .background(.pink)
             .clipShape(.rect(cornerRadius: 10))
             Picker("Times", selection: $selectedInterval){
@@ -56,11 +71,11 @@ struct ContentView: View {
                 Text("60 min").tag(60)
             }
             Text("\(selectedInterval)")
-                .font(.largeTitle) //why are functions able to be called w/o a ()?
+                .font(.largeTitle)
             Button("Request Notification Auth"){
+                print("Noti auth button pressed")
                 NotificationManager().requestAuthorization()
             }
-            
         }
     }
 }
@@ -68,3 +83,9 @@ struct ContentView: View {
 #Preview {
     ContentView()
 }
+
+/*
+ Questions:
+ why are functions able to be called w/o a ()?
+ why are buttons able to drop the parameters and let actions and labels go belowo them? is swiftindent based like python as well? Its kinda insane that I can create an object, and I can also adjust the object just by putting the adjustments in the next line, rather than needing brackets
+ */
