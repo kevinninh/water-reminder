@@ -16,16 +16,15 @@ func sakuraMiko() {
 class NotificationManager {
     static let shared = NotificationManager() //singleton design pattern
     
-    func scheduleNotificaation(title: String, body: String){
+    func scheduleNotification(){
         let content = UNMutableNotificationContent()
         content.title = "Drink water"
         content.body = "here to be here lol"
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: nextTriggerData(selectedInterval), repeats: remindersEnabled)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
         
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        
+        let request = UNNotificationRequest(identifier: "example notification",content: content, trigger: trigger)
+    
     }
     
     
@@ -75,6 +74,9 @@ struct ContentView: View {
             Button("Request Notification Auth"){
                 print("Noti auth button pressed")
                 NotificationManager().requestAuthorization()
+            }
+            Button("Schedule Notification"){
+                NotificationManager().scheduleNotification()
             }
         }
     }
