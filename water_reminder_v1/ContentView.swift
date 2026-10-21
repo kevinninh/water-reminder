@@ -20,11 +20,13 @@ class NotificationManager {
         let content = UNMutableNotificationContent()
         content.title = "Drink water"
         content.body = "here to be here lol"
+        content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
         
         let request = UNNotificationRequest(identifier: "example notification",content: content, trigger: trigger)
-    
+        
+        UNUserNotificationCenter.current().add(request)
     }
     
     
@@ -60,6 +62,12 @@ struct ContentView: View {
             }   label: {
                 Text("enable reminders")
             }
+            if remindersEnabled == true{
+                NotificationManager().scheduleNotification()
+            }
+            else{
+                
+            }
             .padding()
             .background(.pink)
             .clipShape(.rect(cornerRadius: 10))
@@ -76,6 +84,7 @@ struct ContentView: View {
                 NotificationManager().requestAuthorization()
             }
             Button("Schedule Notification"){
+                print("schedule button pressed")
                 NotificationManager().scheduleNotification()
             }
         }
