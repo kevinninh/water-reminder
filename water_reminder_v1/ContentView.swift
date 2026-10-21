@@ -16,6 +16,9 @@ func sakuraMiko() {
 class NotificationManager {
     static let shared = NotificationManager() //singleton design pattern
     
+    private init(){
+    }
+    
     func scheduleNotification(){
         let content = UNMutableNotificationContent()
         content.title = "Drink water"
@@ -40,6 +43,11 @@ class NotificationManager {
                 print("Permission granted: \(granted)")
             }
     }
+    
+    func cancelNotifications(){
+        UNUserNotificationCenter.current()
+            .removePendingNotificationRequests(withIdentifiers: ["example notification"])
+    }
 }
 
 struct ContentView: View {
@@ -48,7 +56,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Image(systemName: "drop.fill")
-            Text(remindersEnabled ? "Reminders enabled" : "Reminders disabled")
+            /*Text(remindersEnabled ? "Reminders enabled" : "Reminders disabled")
             Text("I love Hoshimachi Suisei!!!!!")
                 .foregroundStyle(.blue)
             Text("I also love Oozora Subaru!!!!")
@@ -56,17 +64,17 @@ struct ContentView: View {
             Button("Sakura Miko!!") {
                 sakuraMiko()
             }
-            .foregroundStyle(.pink)
+            .foregroundStyle(.pink)*/
             Button{
                 remindersEnabled.toggle()
+                if remindersEnabled{
+                    NotificationManager.shared.scheduleNotification()
+                }
+                else{
+                    NotificationManager.shared.cancelNotifications()
+                }
             }   label: {
                 Text("enable reminders")
-            }
-            if remindersEnabled == true{
-                NotificationManager().scheduleNotification()
-            }
-            else{
-                
             }
             .padding()
             .background(.pink)
@@ -81,11 +89,11 @@ struct ContentView: View {
                 .font(.largeTitle)
             Button("Request Notification Auth"){
                 print("Noti auth button pressed")
-                NotificationManager().requestAuthorization()
+                NotificationManager.shared.requestAuthorization()
             }
             Button("Schedule Notification"){
                 print("schedule button pressed")
-                NotificationManager().scheduleNotification()
+                NotificationManager.shared.scheduleNotification()
             }
         }
     }
