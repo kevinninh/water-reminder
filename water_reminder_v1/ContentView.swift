@@ -14,13 +14,13 @@ class NotificationManager {
     private init(){
     }
     
-    func scheduleNotification(){
+    func scheduleNotification(interval: Int, shouldRepeat: Bool){
         let content = UNMutableNotificationContent()
         content.title = "Drink water"
         content.body = "here to be here lol"
         content.sound = UNNotificationSound.default
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(interval*60), repeats: shouldRepeat)
         
         let request = UNNotificationRequest(identifier: "example notification",content: content, trigger: trigger)
         
@@ -51,16 +51,17 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Image(systemName: "drop.fill")
+            Text("\(remindersEnabled)")
             Button{
                 remindersEnabled.toggle()
                 if remindersEnabled{
-                    NotificationManager.shared.scheduleNotification()
+                    NotificationManager.shared.scheduleNotification(interval: selectedInterval, shouldRepeat: remindersEnabled)
                 }
                 else{
                     NotificationManager.shared.cancelNotifications()
                 }
             }   label: {
-                Text("enable reminders")
+                Text(remindersEnabled ? "disable reminders" : "enable reminders")
             }
             .padding()
             .background(.pink)
@@ -71,6 +72,12 @@ struct ContentView: View {
                 Text("45 min").tag(45)
                 Text("60 min").tag(60)
             }
+            .onChange(of: selectedInterval){
+                if remindersEnabled{
+                    NotificationManager.shared.scheduleNotification(interval: selectedInterval, shouldRepeat: remindersEnabled)
+                }
+            }
+        
             Text("\(selectedInterval)")
                 .font(.largeTitle)
             Button("Request Notification Auth"){
@@ -79,7 +86,7 @@ struct ContentView: View {
             }
             Button("Schedule Notification"){
                 print("schedule button pressed")
-                NotificationManager.shared.scheduleNotification()
+                NotificationManager.shared.scheduleNotification(interval: selectedInterval, shouldRepeat: remindersEnabled)
             }
         }
     }
