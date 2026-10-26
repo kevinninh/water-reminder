@@ -47,7 +47,7 @@ class NotificationManager {
 
 struct ContentView: View {
     @State private var remindersEnabled = false
-    @State private var selectedInterval = 30
+    @State private var notificationInterval = 30
     var body: some View {
         VStack {
             Image(systemName: "drop.fill")
@@ -55,7 +55,7 @@ struct ContentView: View {
             Button{
                 remindersEnabled.toggle()
                 if remindersEnabled{
-                    NotificationManager.shared.scheduleNotification(interval: selectedInterval, shouldRepeat: remindersEnabled)
+                    NotificationManager.shared.scheduleNotification(interval: notificationInterval, shouldRepeat: remindersEnabled)
                 }
                 else{
                     NotificationManager.shared.cancelNotifications()
@@ -66,27 +66,30 @@ struct ContentView: View {
             .padding()
             .background(.pink)
             .clipShape(.rect(cornerRadius: 10))
-            Picker("Times", selection: $selectedInterval){
+            
+            Picker("Times", selection: $notificationInterval){
                 Text("15 min").tag(15)
                 Text("30 min").tag(30)
                 Text("45 min").tag(45)
                 Text("60 min").tag(60)
             }
-            .onChange(of: selectedInterval){
+            .onChange(of: notificationInterval){
                 if remindersEnabled{
-                    NotificationManager.shared.scheduleNotification(interval: selectedInterval, shouldRepeat: remindersEnabled)
+                    NotificationManager.shared.scheduleNotification(interval: notificationInterval, shouldRepeat: remindersEnabled)
                 }
             }
         
-            Text("\(selectedInterval)")
+            Text("\(notificationInterval)")
                 .font(.largeTitle)
+            
             Button("Request Notification Auth"){
                 print("Noti auth button pressed")
                 NotificationManager.shared.requestAuthorization()
             }
+            
             Button("Schedule Notification"){
                 print("schedule button pressed")
-                NotificationManager.shared.scheduleNotification(interval: selectedInterval, shouldRepeat: remindersEnabled)
+                NotificationManager.shared.scheduleNotification(interval: notificationInterval, shouldRepeat: remindersEnabled)
             }
         }
     }
