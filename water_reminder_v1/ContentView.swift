@@ -51,7 +51,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Image(systemName: "drop.fill")
-            Text("\(remindersEnabled)")
+            Text("\(remindersEnabled)") //ignore warning
             Button{
                 remindersEnabled.toggle()
                 if remindersEnabled{
