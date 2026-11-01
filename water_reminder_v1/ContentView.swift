@@ -54,7 +54,7 @@ struct ContentView: View {
             Text("\(remindersEnabled)")
             Button{
                 remindersEnabled.toggle()
-                if remindersEnables{
+                if remindersEnabled{
                     NotificationManager.shared.scheduleNotification(interval: notificationInterval, shouldRepeat: remindersEnabled)
                 }
                 else{
