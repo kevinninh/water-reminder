@@ -25,8 +25,10 @@ class NotificationManager {
         let request = UNNotificationRequest(identifier: "example notification",content: content, trigger: trigger)
         
         UNUserNotificationCenter.current().add(request)
+        
+        UNTimeIntervalNotificationTrigger = interval * 60
     }
-    
+
     
     func requestAuthorization(){
         UNUserNotificationCenter.current()
