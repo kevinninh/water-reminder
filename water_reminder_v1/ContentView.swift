@@ -26,7 +26,6 @@ class NotificationManager {
         
         UNUserNotificationCenter.current().add(request)
         
-        UNTimeIntervalNotificationTrigger = intervalMinutes * 60
     }
 
     
