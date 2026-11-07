@@ -11,7 +11,7 @@ import UserNotifications
 class NotificationManager {
     static let shared = NotificationManager() //singleton design pattern
     
-    private init(){
+    private init(){ //ensures that the shared variable is private
     }
     
     func scheduleNotification(interval: Int, shouldRepeat: Bool){
@@ -80,8 +80,8 @@ struct ContentView: View {
                 }
             }
         
-            Text("\(notificationInterval)")
-                .font(.largeTitle)
+            //Text("\(notificationInterval)")
+            //   .font(.largeTitle)
             
             Button("Request Notification Auth"){
                 print("Noti auth button pressed")
