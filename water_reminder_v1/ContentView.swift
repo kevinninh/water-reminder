@@ -4,6 +4,7 @@
 //
 //  Created by Kevin Ninh on 10/17/26.
 //
+//all thats left is t make it s.t. i can get reoccurring notifications
 
 import SwiftUI
 import UserNotifications
