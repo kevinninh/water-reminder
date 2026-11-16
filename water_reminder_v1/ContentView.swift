@@ -92,12 +92,9 @@ struct ContentView: View {
             Text(remindersEnabled ? "Reminders are on" : "Reminders are off")
                 .foregroundStyle(.secondary)
 
-            Picker("Remind me every", selection: $notificationInterval) {
-                Text("15 minutes").tag(15)
-                Text("30 minutes").tag(30)
-                Text("45 minutes").tag(45)
-                Text("60 minutes").tag(60)
-            }
+            TextField("Enter minutes", value: $notificationInterval, format: .number)
+                .keyboardType(.numberPad)
+                .textFieldStyle(.roundedBorder)
             .pickerStyle(.menu)
             .disabled(isBusy)
             .onChange(of: notificationInterval) { _, newValue in
